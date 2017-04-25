@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>无限翻页测试+导航栏吸顶测试</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        #spinner{
+            position: fixed;
+            top: 20px;
+            left: 40%;
+            display: block;
+            color: red;
+            font-weight: 900;
+            background-color: rgba(80, 80, 90, 0.22);
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 100px;
+            padding-right: 100px;
+            border-radius: 15px;
+        }
+        .topmenu{
+            border:1px solid black;
+            position:absolute;
+            top:100px;
+            left: 100px;
+            width:100px;
+            height: 100px;
+        }
+        .fixed {
+            position: fixed;
+            top: 0;
+            left: 100px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+<div style="position: relative">
+    <div class="topmenu" style=""></div>
+</div>
+
+<div id="sample">
+</div>
+<div id="spinner">
+    正在加载
+</div>
+<script type="text/javascript">
+    var index = 0;
+    function lowEnough(){
+        var pageHeight = Math.max(document.body.scrollHeight,document.body.offsetHeight);
+        var viewportHeight = window.innerHeight ||
+                document.documentElement.clientHeight ||
+                document.body.clientHeight || 0;
+        var scrollHeight = window.pageYOffset ||
+                document.documentElement.scrollTop ||
+                document.body.scrollTop || 0;
+        // console.log(pageHeight);
+        // console.log(viewportHeight);
+        // console.log(scrollHeight);
+        return pageHeight - viewportHeight - scrollHeight < 20;
+    }
+
+    function doSomething(){
+        var htmlStr = "";
+        for(var i=0;i<10;i++){
+            htmlStr += "这是第"+index+"次加载<br>";
+        }
+        $('#sample').append(htmlStr);
+        index++;
+        pollScroll();//继续循环
+        $('#spinner').hide();
+    }
+
+    function checkScroll(){
+        if(!lowEnough()) return pollScroll();
+
+        $('#spinner').show();
+        setTimeout(doSomething,900);
+
+    }
+    function pollScroll(){
+        setTimeout(checkScroll,1000);
+    }
+
+    function reset_topmenu_top(topmenu, topmenu_top) {
+        var document_scroll_top = jQuery(document).scrollTop();
+        if (document_scroll_top > topmenu_top) {
+            topmenu.addClass("fixed");
+        }
+        if (document_scroll_top <= topmenu_top) {
+
+            topmenu.removeClass("fixed");
+        }
+    }
+    jQuery(document).ready(function() {
+        var topmenu = jQuery(".topmenu");
+        var topmenu_top = topmenu.offset().top;
+        reset_topmenu_top(topmenu, topmenu_top);
+        jQuery(window).scroll(function() {
+            reset_topmenu_top(topmenu, topmenu_top);
+        });
+        checkScroll();
+    });
+
+</script>
+</body>
+</html>

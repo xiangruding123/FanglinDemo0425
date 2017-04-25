@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript" src="js/jquery/jquery-1.8.3.min.js" ></script>
+	<script type="text/javascript">
+		$(function(){
+			
+			//把函数注册到命名空间中
+			//window['FL']['ajaxDate'] = ajaxDate;//获取接口数据
+			
+			function ajaxDate(type,url,data,success,error){
+				//判断设备
+//		        if(native_flag=='-1'){
+//		          data.flag ='wap';
+//		        }else if(native_flag=='0'){
+//		          data.flag ='android';
+//		        }else if(native_flag=='1'){
+//		          data.flag ='ios';
+//		        }
+		        //定义全局变量
+		        data.deviceid ="wap";
+		        data.market = "wap";
+		        data.vercode=328;
+		        data.vername='3.2.8';
+		        //data.mid=getcookie('mid');
+		        
+		        $.ajax({
+		            url: url,
+		            type: type,
+		            data:data,
+		            dataType: 'json',
+		            success: success,
+		            error:error
+		        });
+		    }
+			
+			
+			var geturl = "http://api.juheapi.com/japi/toh?key=0e94b6b0ec79342496e9c7c9cf58e4ee&v=1.0&month=11&day=1";
+			var token="123",
+			 	mid="111",
+				num=1,
+				curpage=1,
+				ok;
+			
+			function AA(){
+				//FL.ajaxDate('get',geturl,{
+				ajaxDate('get',geturl,{
+					//需要传到后台的参数（根据你们后台数据处理 是否需要参数。不需要则不传）
+					token:token,
+					mid:mid,
+					num:num,         //单次请求数量
+					curpage:curpage,  //请求次数
+					ok:ok
+				},function(data){
+					console.log(data);
+			        if(data&&data.error=='0'){
+			        
+			        //页面渲染需要的内容
+			        
+				    }
+			    });
+			
+			}
+			
+			AA();
+			
+		});	
+	</script>
+	
+</html>

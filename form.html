@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.newsaddress_section{
+			    box-sizing: border-box;
+			    padding-top: 88px;
+			}
+			.newsaddress_ul{
+		       margin-bottom: 40px;
+		       width: 100%;
+		       height: auto;
+		       box-sizing: border-box;
+		       padding: 0 25px;
+		       background: #fff;
+		    }
+		    
+			li{
+	           width: 100%;
+	           height: 87px;
+	           display: flex;
+	           font-size: 40px;
+	           border-bottom: 1px solid #ccc;
+	        }
+			.newaddapsp1{
+               flex: 1;
+               line-height: 87px;
+               color: #111;
+            }
+			.newaddapsp2{
+               flex: 1.5;
+               line-height: 87px;
+               color: #111;
+            }
+            i{
+               font-style: normal ;
+               color: #F53058;
+            }
+            .borbtn0{
+	           border: 0;
+	        }
+	        
+	        .spright{
+               width: 20px;
+               float: right;
+               text-align: right;
+               background: url(../img/jinru.png) no-repeat center;
+               background-size: 40% 32%;
+            }
+	        input.inpwidth{
+                flex: 3;
+            }
+            input{
+               color: #777;
+               color: #ccc;
+               flex: 3;
+               border: 0;
+               color: #111111;
+               font-size: 50px;
+               outline: 0;
+            }
+	        .newsaddress_save{
+	        	width: 100%;
+	        	height: 100px;
+	        	background: magenta;
+	        }
+	        #someelement{
+	        	width: 100%;
+	        	height: 100px;
+	        	background: greenyellow;
+	        }
+	        
+	          #addresstips{
+	          	width: 100%;
+	          	height: 100px;
+	          	background: aqua;
+	          	line-height: 100px;
+	          	font-size: 50px;
+	          	color: #100;
+	          	display: none;
+	          	text-align: center;
+	          }
+	          
+	          
+	          input::-webkit-input-placeholder { /* WebKit browsers */  
+				  color: #f00;  
+				}  
+				input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */  
+				  color: #f00;  
+				}  
+				input::-moz-placeholder { /* Mozilla Firefox 19+ */  
+				  color: #f00;  
+				}  
+				input:-ms-input-placeholder { /* Internet Explorer 10+ */  
+				  color: #f00;  
+				}
+
+
+
+		</style>
+	</head>
+	<body>
+		
+		<section class="newsaddress_section">
+			<ul class="newsaddress_ul">
+				<li>
+					<span class="newaddapsp2"><i>*</i>收货人：</span>
+					<input class="true_name color77" id="consignee" type="text" value="" placeholder="请输入姓名"/>
+				</li>
+				<li class="borbtn0">
+					<span class="newaddapsp2"><i>*</i>手机号码：</span>
+					<input class="mobile color77" id="phone" type="tel" value="" placeholder="请输入您的手机号码"/>
+				</li>
+			</ul>
+			
+			<ul class="newsaddress_ul">
+				<li>
+					<span class="newaddapsp1"><i>*</i>所在地区：</span>
+					<input class="area_info inpwidth color77" id="area_info" type="text" readonly="readonly" />
+					<span class="spright area_infosp"></span>
+				</li>
+				<li class="borbtn0">
+					<span class="newaddapsp2"><i>*</i>详细地址：</span>
+					<input class="address color77" id="detailaddress" type="text" value="" placeholder=""/>
+				</li>
+			</ul>
+			<div class="newsaddress_save"></div>
+			<div id="someelement"></div>
+			<div id="addresstips"></div>
+		</section>
+		
+		<INPUT TYPE="TEXT" size="18" value="这是默认的内容" onfocus="if (value =='这是默认的内容'){value =''}" onblur="if (value ==''){value='这是默认的内容'}">
+		
+		
+	</body>
+	<!--<script src="js/jquery/jquery-2.1.4.min.js"></script>-->
+	<script src="js/jquery/jquery-1.8.3.min.js"></script>
+	
+	<script type="text/javascript">
+	
+		$('.newsaddress_save').bind('click', function() {
+			var consignee = $('#consignee').val();
+			var phone = $('#phone').val();
+			if(/^1(3|4|5|7|8)\d{9}$/.test(phone)){ 
+		    	flag=1;
+		    } 
+			var detailaddress = $('#detailaddress').val();
+			
+			if (consignee=="") {
+				$('#addresstips').html("收货人不能为空");
+				$('#addresstips').show();
+				setTimeout(function(){
+		  			$('#addresstips').hide();
+		  		},2000);
+			} else{
+				if (phone=="") {
+					$('#addresstips').html("手机号格式不正确");
+					$('#addresstips').show();
+					setTimeout(function(){
+			  			$('#addresstips').hide();
+			  		},2000);
+				} else{
+			  		if (flag==0) {
+			  			$('#addresstips').html("手机号格式不正确");
+						$('#addresstips').show();
+						setTimeout(function(){
+				  			$('#addresstips').hide();
+				  		},2000);
+			  		} else{
+			  			if (detailaddress=="") {
+			  				$('#addresstips').html("请输入详细地址！");
+							$('#addresstips').show();
+							setTimeout(function(){
+					  			$('#addresstips').hide();
+					  		},2000);
+			  			} else{
+			  				alert("表单验证成功！！！")     
+			  			}
+			  		}
+				}
+			}
+		});
+		
+		
+		//静止右键菜单
+		$(document).bind('contextmenu',function(e){ 
+		　　return false; 
+		}); 
+		
+		//判断是鼠标左键还是右键执行点击了
+		$("#someelement").bind('click', function(e) { 
+		    if( (!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1) ) { 
+		        alert("点击的是左鼠标！！"); 
+		    } else if(e.button == 2) { 
+		        alert("点击的是右鼠标！！"); 
+		    }
+		});
+
+
+		
+	</script>
+</html>

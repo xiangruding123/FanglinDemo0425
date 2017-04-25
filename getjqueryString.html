@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+</html>
+<script>
+
+	function GetQueryString(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	    var r = window.location.search.substr(1).match(reg);
+	    if (r != null)
+	        return decodeURI(r[2]);
+	    return null;
+	}
+
+	var url = http://127.0.0.1:8020/fenhong/wholesale/tmpl/address/address_association.html？cart_id=123&name=xrd&age=89;
+	
+	var cart_id = GetQueryString('cart_id');
+	console.log(cart_id);
+	
+	
+</script>

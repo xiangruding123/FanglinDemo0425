@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>谷歌浏览器下存在样式显示的问题</title>
+		<link rel="stylesheet" href="js/layer2/mobile/need/layer.css" />
+		
+		<style type="text/css">
+			body{
+				font-size: 14px;
+				line-height: 24px;
+			}
+			.laybtn{
+				width: 2000px;
+				height: 500px;
+				background: magenta;
+				line-height: 500px;
+				font-size: 132px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="laybtn">点击我查看layer.js的弹出框</div>
+	</body>
+	
+	<script src="js/jquery/jquery-2.1.3.min.js"></script>
+	<script src="js/layer2/layer.js"></script>
+	
+	<script type="text/javascript">
+		$('.laybtn').bind("click",function(){
+			
+			layer.msg("提示信息！！");
+			
+		});
+		
+	</script>
+	
+</html>
