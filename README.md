@@ -1,5 +1,3 @@
-
-
 ## code20170425_02Demo
 ##### 我的练习题
 
@@ -9,7 +7,7 @@
 
 ajax.html   ajax請求的demo
 
-demo.html /demo4.html 左划出现删除按钮，右滑隐藏
+demo.html、demo4.html 左划出现删除按钮，右滑隐藏
 
 demo9.html  无限翻页测试+导航栏吸顶测试
 
